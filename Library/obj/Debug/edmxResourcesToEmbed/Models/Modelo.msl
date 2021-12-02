@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="libreriaModelStoreContainer" CdmEntityContainer="libreriaEntities">
+    <EntitySetMapping Name="autor">
+      <EntityTypeMapping TypeName="libreria.Model.autor">
+        <MappingFragment StoreEntitySet="autor">
+          <ScalarProperty Name="id_autor" ColumnName="id_autor" />
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+          <ScalarProperty Name="pais_id" ColumnName="pais_id" />
+          <ScalarProperty Name="genero_id" ColumnName="genero_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="genero">
+      <EntityTypeMapping TypeName="libreria.Model.genero">
+        <MappingFragment StoreEntitySet="genero">
+          <ScalarProperty Name="id_genero" ColumnName="id_genero" />
+          <ScalarProperty Name="genero1" ColumnName="genero" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="idioma">
+      <EntityTypeMapping TypeName="libreria.Model.idioma">
+        <MappingFragment StoreEntitySet="idioma">
+          <ScalarProperty Name="id_idioma" ColumnName="id_idioma" />
+          <ScalarProperty Name="idioma1" ColumnName="idioma" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="libro">
+      <EntityTypeMapping TypeName="libreria.Model.libro">
+        <MappingFragment StoreEntitySet="libro">
+          <ScalarProperty Name="id_libro" ColumnName="id_libro" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="editorial" ColumnName="editorial" />
+          <ScalarProperty Name="idioma_id" ColumnName="idioma_id" />
+          <ScalarProperty Name="año" ColumnName="año" />
+          <ScalarProperty Name="num_paginas" ColumnName="num_paginas" />
+          <ScalarProperty Name="autor_id" ColumnName="autor_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pais">
+      <EntityTypeMapping TypeName="libreria.Model.pais">
+        <MappingFragment StoreEntitySet="pais">
+          <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+          <ScalarProperty Name="nombre_pais" ColumnName="nombre_pais" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

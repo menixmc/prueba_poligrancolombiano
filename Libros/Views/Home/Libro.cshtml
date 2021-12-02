@@ -1,0 +1,91 @@
+﻿@model Libros.Models.Libro
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+    <div class="container">
+        <br /><br />
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>FORMULARIO DE CREACION DE LIBROS</strong>
+            </div>
+            <br />
+            <div class="panel panel-body">
+                <form id="formulario" method="post" action="Libro" enctype="multipart/form-data">
+                    <div class="row">
+                        <input type="hidden" id="idlibro" name="idlibro" value="@Model.IdLibro " />
+                        <div class="col-sm-4 form-group">
+                            <label class="control-label">Titulo:</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" value="@Model.Titulo" maxlength="100" required />
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <label class="control-label">Editorial:</label>
+                            <input type="text" class="form-control" id="editorial" name="editorial" value="@Model.Editorial" maxlength="50" required />
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <label class="control-label">Idioma:</label>
+                            <select class="form-control" id="idioma" name="idioma" required>
+                                <option>- Seleccionar -</option>
+                                @foreach (Libros.Models.Idioma item in ViewBag.idiomas)
+                                {
+                                    if (Model.idioma_id != 0)
+                                    {
+                                        if (Model.idioma_id == item.Id_Idioma)
+                                        {
+                                            <option selected value="@item.Id_Idioma">@item.Idioma1</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id_Idioma">@item.Idioma1</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id_Idioma">@item.Idioma1</option>
+                                    }
+
+                                }
+                            </select>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <label class="control-label">Año:</label>
+                            <input type="number" class="form-control" id="año" name="año" value="@Model.Año" maxlength="4" required />
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <label class="control-label">N paginas:</label>
+                            <input type="number" class="form-control" id="npaginas" name="npaginas" value="@Model.NumPaginas" maxlength="6" required />
+                        </div>
+
+                        <div class="col-sm-4 form-group">
+                            <label class="control-label">Autor:</label>
+                            <select class="form-control" id="autor" name="autor" required>
+                                <option>- Seleccionar -</option>
+                                @foreach (Libros.Models.Autor item in ViewBag.autores)
+                                {
+                                    if (Model.AutorId != 0)
+                                    {
+                                        if (Model.AutorId == item.IdAutor)
+                                        {
+                                            <option selected value="@item.IdAutor">@item.Nombres @item.Apellidos</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.IdAutor">@item.Nombres @item.Apellidos</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.IdAutor">@item.Nombres @item.Apellidos</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class=" col-sm-12 text-center">
+                            <a href="@Url.Action("LibrosList","Home")" role="button" class="btn btn-danger">Volver</a>
+                            <button class="btn btn-success" type="submit">Guardar Cambios</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

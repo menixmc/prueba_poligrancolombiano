@@ -1,0 +1,99 @@
+﻿@model Library.Models.autor
+@{
+    ViewBag.Title = "Autor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>FORMULARIO DE CREACION DE AUTORES</strong>
+        </div>
+        <div class="panel panel-body">
+            <form id="formulario" method="post" action="Autor" enctype="multipart/form-data">
+                <div class="row">
+                    <input type="hidden" id="idautor" name="idautor" value="@Model.id_autor" />
+                    <div class="col-sm-4 form-group">
+                        <label class="control-label">Nombres:</label>
+                        <input type="text" class="form-control" id="nombres" name="nombres" value="@Model.nombres" maxlength="50" required />
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="control-label">Apellidos:</label>
+                        <input type="text" class="form-control" id="apellidos" name="apellidos" value="@Model.apellidos" maxlength="50" required />
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="control-label">Fecha de nacimiento:</label>
+                        @if (Model.fecha_nacimiento == null)
+                        {
+                            <input type="date" class="form-control" id="fecha" name="fecha" value="" required />
+                        }
+                        else
+                        {
+                            <input type="date" class="form-control" id="fecha" name="fecha" value="@Model.fecha_nacimiento.Value.Date.ToString("mm/dd/yyyy")" required />
+                        }
+
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="control-label">Nacionalidad:</label>
+                        <select class="form-control" id="nacionalidad" name="nacionalidad" required>
+                            <option>- Seleccionar -</option>
+                            @foreach (Library.Models.pais item in ViewBag.pais)
+                            {
+                                if (Model.pais_id != 0)
+                                {
+                                    if (Model.pais_id == item.id_pais)
+                                    {
+                                        <option selected value="@item.id_pais">@item.nombre_pais</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.id_pais">@item.nombre_pais</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="@item.id_pais">@item.nombre_pais</option>
+                                }
+
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label class="control-label">Genero:</label>
+                        <select class="form-control" id="genero" name="genero" required>
+                            <option>- Seleccionar -</option>
+                            @foreach (Library.Models.genero item in ViewBag.genero)
+                            {
+                                if (Model.genero_id != 0)
+                                {
+                                    if (Model.genero_id == item.id_genero)
+                                    {
+                                        <option selected value="@item.id_genero">@item.genero1</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.id_genero">@item.genero1</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="@item.id_genero">@item.genero1</option>
+                                }
+
+                            }
+                        </select>
+                    </div>
+                    <div class=" col-sm-12 text-center">
+                        <a href="@Url.Action("AutorList","Home")" role="button" class="btn btn-danger">Volver</a>
+                        <button class="btn btn-primary" type="submit">Guardar Cambios</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

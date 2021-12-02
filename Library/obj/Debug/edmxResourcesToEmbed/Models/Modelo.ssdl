@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="libreria.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="autor">
+    <Key>
+      <PropertyRef Name="id_autor" />
+    </Key>
+    <Property Name="id_autor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombres" Type="varchar" MaxLength="50" />
+    <Property Name="apellidos" Type="varchar" MaxLength="50" />
+    <Property Name="fecha_nacimiento" Type="date" />
+    <Property Name="pais_id" Type="int" Nullable="false" />
+    <Property Name="genero_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="genero">
+    <Key>
+      <PropertyRef Name="id_genero" />
+    </Key>
+    <Property Name="id_genero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="genero" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="idioma">
+    <Key>
+      <PropertyRef Name="id_idioma" />
+    </Key>
+    <Property Name="id_idioma" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idioma" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="libro">
+    <Key>
+      <PropertyRef Name="id_libro" />
+    </Key>
+    <Property Name="id_libro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="titulo" Type="varchar" MaxLength="100" />
+    <Property Name="editorial" Type="varchar" MaxLength="100" />
+    <Property Name="idioma_id" Type="int" Nullable="false" />
+    <Property Name="año" Type="int" />
+    <Property Name="num_paginas" Type="int" />
+    <Property Name="autor_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pais">
+    <Key>
+      <PropertyRef Name="id_pais" />
+    </Key>
+    <Property Name="id_pais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_pais" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__autor__genero_id__3B75D760">
+    <End Role="genero" Type="Self.genero" Multiplicity="1" />
+    <End Role="autor" Type="Self.autor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="genero">
+        <PropertyRef Name="id_genero" />
+      </Principal>
+      <Dependent Role="autor">
+        <PropertyRef Name="genero_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__autor__pais_id__3A81B327">
+    <End Role="pais" Type="Self.pais" Multiplicity="1" />
+    <End Role="autor" Type="Self.autor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pais">
+        <PropertyRef Name="id_pais" />
+      </Principal>
+      <Dependent Role="autor">
+        <PropertyRef Name="pais_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__libro__autor_id__412EB0B6">
+    <End Role="autor" Type="Self.autor" Multiplicity="1" />
+    <End Role="libro" Type="Self.libro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="autor">
+        <PropertyRef Name="id_autor" />
+      </Principal>
+      <Dependent Role="libro">
+        <PropertyRef Name="autor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__libro__idioma_id__403A8C7D">
+    <End Role="idioma" Type="Self.idioma" Multiplicity="1" />
+    <End Role="libro" Type="Self.libro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="idioma">
+        <PropertyRef Name="id_idioma" />
+      </Principal>
+      <Dependent Role="libro">
+        <PropertyRef Name="idioma_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="libreriaModelStoreContainer">
+    <EntitySet Name="autor" EntityType="Self.autor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="genero" EntityType="Self.genero" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="idioma" EntityType="Self.idioma" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="libro" EntityType="Self.libro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pais" EntityType="Self.pais" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__autor__genero_id__3B75D760" Association="Self.FK__autor__genero_id__3B75D760">
+      <End Role="genero" EntitySet="genero" />
+      <End Role="autor" EntitySet="autor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__autor__pais_id__3A81B327" Association="Self.FK__autor__pais_id__3A81B327">
+      <End Role="pais" EntitySet="pais" />
+      <End Role="autor" EntitySet="autor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__libro__autor_id__412EB0B6" Association="Self.FK__libro__autor_id__412EB0B6">
+      <End Role="autor" EntitySet="autor" />
+      <End Role="libro" EntitySet="libro" />
+    </AssociationSet>
+    <AssociationSet Name="FK__libro__idioma_id__403A8C7D" Association="Self.FK__libro__idioma_id__403A8C7D">
+      <End Role="idioma" EntitySet="idioma" />
+      <End Role="libro" EntitySet="libro" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

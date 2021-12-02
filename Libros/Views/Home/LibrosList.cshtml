@@ -1,0 +1,72 @@
+﻿@model List<Libros.Models.Libro>
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+<div class="container">
+    <br />
+    <br />
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>LISTADO GENERAL DE LIBROS</strong>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12 text-right form-group">
+                    <a href="@Url.Action("Libro","Home")" class="btn btn-success" role="button">Añadir Libro</a>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped table-condensed" style="font-size: 14px;">
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Autor</th>
+                        <th>Editorial</th>
+                        <th>Idioma</th>
+                        <th>Año</th>
+                        <th>Numero de paginas</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Titulo</td>
+                                <td>@item.Autor.Nombres @item.Autor.Apellidos</td>
+                                <td>@item.Editorial</td>
+                                <td>@item.Idioma.Idioma1</td>
+                                <td>@item.Año</td>
+                                <td>@item.NumPaginas</td>
+                                <td class="text-center"><a class="btn btn-success btn-sm" role="button" href="@Url.Action("Libro","Home", new {idlibro = item.IdLibro})"><i class="glyphicon glyphicon-pencil"></i> Editar</a></td>
+                                <td class="text-center"><a class="btn btn-danger btn-sm" role="button" href="javascript:EliminarLibro(@item.IdLibro)"><i class="glyphicon glyphicon-trash"></i> Eliminar</a></td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td class="text-center" colspan="8">No se han cargado datos</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    function EliminarLibro(a)
+    {
+        var txt = confirm("Esta seguro/a de eliminar este libro?");
+        if (txt) {
+            var url = "@Url.Action("EliminarLibro", "Home")?idlibro=" + a;
+            location.href = url;
+        }
+    }
+</script>
+
